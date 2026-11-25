@@ -1,0 +1,948 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<title>CBT | Pendidikan Pancasila VIII | Ulangan Harian Bab 2</title>
+<script src="https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.26.10/babel.min.js"></script>
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<style>
+:root{color-scheme:light}body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:linear-gradient(135deg,#083344,#075985 48%,#1e40af);min-height:100vh}button,input,textarea{font:inherit}button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #38bdf8;outline-offset:3px}.exam-lock,.exam-lock *{-webkit-user-select:none;user-select:none}.exam-lock textarea{-webkit-user-select:none;user-select:none}.card{background:#fff;border:1px solid #e0f2fe;border-radius:24px;box-shadow:0 14px 35px #082f4933}.btn{display:inline-flex;justify-content:center;align-items:center;gap:.5rem;border-radius:14px;padding:.8rem 1.15rem;font-weight:700;transition:background .15s,transform .15s}.btn:disabled{opacity:.5;cursor:not-allowed}.primary{background:#0369a1;color:white}.primary:hover:not(:disabled){background:#075985}.secondary{background:#e0f2fe;color:#075985}.secondary:hover:not(:disabled){background:#bae6fd}.danger{background:#b91c1c;color:white}.danger:hover:not(:disabled){background:#991b1b}.field{width:100%;border:1px solid #cbd5e1;border-radius:12px;padding:.8rem 1rem;background:white;color:#0f172a}.field:focus{border-color:#0284c7}.fade{animation:appear .18s ease-out}@keyframes appear{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}.wordwrap{overflow-wrap:anywhere}.question-text{white-space:pre-wrap;line-height:1.8}.modal-panel{max-height:90vh;overflow:auto}.progress-bar{transition:width .2s}.tabular{font-variant-numeric:tabular-nums}
+</style>
+</head>
+<body>
+<div id="root"><div style="color:white;padding:2rem;font-family:system-ui">Memuat aplikasi CBT… Pastikan koneksi internet tersedia untuk memuat pustaka. Jika tampilan tidak berubah, periksa koneksi dan konsol browser.</div></div>
+<noscript>Aktifkan JavaScript untuk menjalankan ujian.</noscript>
+<script type="text/babel" data-presets="react">
+'use strict';
+const GOOGLE_SHEETS_WEB_APP_URL = "https://script.google.com/macros/s/AKfycbyf4IiTLGxbIvxafH4SMJ2FUg_X3ko-byGF2cMvhT0ke_azunqWtR71xWN3SzyxqJEVtw/exec";
+const EXAM = Object.freeze({mapel:'Pendidikan Pancasila', jenis:'Ulangan Harian Bab 2', kelas:'VIII', topik:'Pedoman Negaraku', duration:90*60, id:'pancasila_viii_bab_2'});
+const STORAGE_KEY = 'cbt_pendidikan_pancasila_viii_bab_2';
+const SESSION_VERSION = 1;
+const rawQuestionsData = 
+[
+  {
+    "id": 1,
+    "type": "mc",
+    "prompt": "Hukum dasar yang dijadikan pegangan dalam penyelenggaraan suatu negara disebut ....",
+    "options": [
+      {
+        "id": "A",
+        "text": "tata tertib sekolah"
+      },
+      {
+        "id": "B",
+        "text": "konstitusi"
+      },
+      {
+        "id": "C",
+        "text": "keputusan rapat"
+      },
+      {
+        "id": "D",
+        "text": "peraturan keluarga"
+      }
+    ],
+    "correctAnswer": "B"
+  },
+  {
+    "id": 2,
+    "type": "mc",
+    "prompt": "Konstitusi tertulis biasa disebut ....",
+    "options": [
+      {
+        "id": "A",
+        "text": "konvensi"
+      },
+      {
+        "id": "B",
+        "text": "hukum adat"
+      },
+      {
+        "id": "C",
+        "text": "Undang-Undang Dasar"
+      },
+      {
+        "id": "D",
+        "text": "kebiasaan kenegaraan"
+      }
+    ],
+    "correctAnswer": "C"
+  },
+  {
+    "id": 3,
+    "type": "mc",
+    "prompt": "Naskah yang dihasilkan oleh Panitia Sembilan pada 22 Juni 1945 adalah ....",
+    "options": [
+      {
+        "id": "A",
+        "text": "Piagam Jakarta"
+      },
+      {
+        "id": "B",
+        "text": "Proklamasi Kemerdekaan"
+      },
+      {
+        "id": "C",
+        "text": "rancangan batang tubuh UUD ketiga"
+      },
+      {
+        "id": "D",
+        "text": "keputusan sidang PPKI"
+      }
+    ],
+    "correctAnswer": "A"
+  },
+  {
+    "id": 4,
+    "type": "mc",
+    "prompt": "Sidang kedua BPUPK (Badan Penyelidik Usaha-Usaha Persiapan Kemerdekaan) berlangsung pada ....",
+    "options": [
+      {
+        "id": "A",
+        "text": "29 Mei–1 Juni 1945"
+      },
+      {
+        "id": "B",
+        "text": "17–18 Agustus 1945"
+      },
+      {
+        "id": "C",
+        "text": "14–21 Oktober 1999"
+      },
+      {
+        "id": "D",
+        "text": "10–17 Juli 1945"
+      }
+    ],
+    "correctAnswer": "D"
+  },
+  {
+    "id": 5,
+    "type": "mc",
+    "prompt": "Tokoh yang memimpin Panitia Kecil penyusun batang tubuh UUD (bagian yang memuat pasal-pasal) adalah ....",
+    "options": [
+      {
+        "id": "A",
+        "text": "Mohammad Hatta"
+      },
+      {
+        "id": "B",
+        "text": "Radjiman Wedyodiningrat"
+      },
+      {
+        "id": "C",
+        "text": "Soepomo"
+      },
+      {
+        "id": "D",
+        "text": "Mohammad Yamin"
+      }
+    ],
+    "correctAnswer": "C"
+  },
+  {
+    "id": 6,
+    "type": "mc",
+    "prompt": "Panitia Persiapan Kemerdekaan Indonesia (PPKI) mengesahkan UUD 1945 pada tanggal ....",
+    "options": [
+      {
+        "id": "A",
+        "text": "17 Agustus 1945"
+      },
+      {
+        "id": "B",
+        "text": "18 Agustus 1945"
+      },
+      {
+        "id": "C",
+        "text": "22 Juni 1945"
+      },
+      {
+        "id": "D",
+        "text": "16 Juli 1945"
+      }
+    ],
+    "correctAnswer": "B"
+  },
+  {
+    "id": 7,
+    "type": "mc",
+    "prompt": "UUD NRI Tahun 1945 bersifat singkat karena memuat ....",
+    "options": [
+      {
+        "id": "A",
+        "text": "aturan-aturan pokok"
+      },
+      {
+        "id": "B",
+        "text": "seluruh aturan teknis pemerintahan"
+      },
+      {
+        "id": "C",
+        "text": "semua kebiasaan masyarakat"
+      },
+      {
+        "id": "D",
+        "text": "seluruh peraturan daerah"
+      }
+    ],
+    "correctAnswer": "A"
+  },
+  {
+    "id": 8,
+    "type": "mc",
+    "prompt": "Dalam tata urutan peraturan perundang-undangan di Indonesia, kedudukan UUD NRI Tahun 1945 adalah ....",
+    "options": [
+      {
+        "id": "A",
+        "text": "setara dengan undang-undang"
+      },
+      {
+        "id": "B",
+        "text": "di bawah undang-undang"
+      },
+      {
+        "id": "C",
+        "text": "setara dengan peraturan pemerintah"
+      },
+      {
+        "id": "D",
+        "text": "tertinggi"
+      }
+    ],
+    "correctAnswer": "D"
+  },
+  {
+    "id": 9,
+    "type": "mc",
+    "prompt": "Pada tahun 1999–2002 UUD NRI Tahun 1945 mengalami amendemen (perubahan) sebanyak ....",
+    "options": [
+      {
+        "id": "A",
+        "text": "dua kali"
+      },
+      {
+        "id": "B",
+        "text": "empat kali"
+      },
+      {
+        "id": "C",
+        "text": "tiga kali"
+      },
+      {
+        "id": "D",
+        "text": "lima kali"
+      }
+    ],
+    "correctAnswer": "B"
+  },
+  {
+    "id": 10,
+    "type": "mc",
+    "prompt": "Lembaga negara yang berwenang menguji undang-undang terhadap UUD NRI Tahun 1945 adalah ....",
+    "options": [
+      {
+        "id": "A",
+        "text": "Mahkamah Agung"
+      },
+      {
+        "id": "B",
+        "text": "Dewan Perwakilan Rakyat"
+      },
+      {
+        "id": "C",
+        "text": "Mahkamah Konstitusi"
+      },
+      {
+        "id": "D",
+        "text": "Majelis Permusyawaratan Rakyat"
+      }
+    ],
+    "correctAnswer": "C"
+  },
+  {
+    "id": 11,
+    "type": "mc",
+    "prompt": "Kegiatan upacara bendera di sekolah merupakan contoh pelaksanaan UUD NRI Tahun 1945 dalam bidang ....",
+    "options": [
+      {
+        "id": "A",
+        "text": "bela negara"
+      },
+      {
+        "id": "B",
+        "text": "perdagangan"
+      },
+      {
+        "id": "C",
+        "text": "perubahan konstitusi"
+      },
+      {
+        "id": "D",
+        "text": "pemilihan umum"
+      }
+    ],
+    "correctAnswer": "A"
+  },
+  {
+    "id": 12,
+    "type": "mc",
+    "prompt": "Lembaga negara yang berwenang mengubah UUD NRI Tahun 1945 adalah ....",
+    "options": [
+      {
+        "id": "A",
+        "text": "Mahkamah Agung (MA)"
+      },
+      {
+        "id": "B",
+        "text": "Mahkamah Konstitusi (MK)"
+      },
+      {
+        "id": "C",
+        "text": "Dewan Perwakilan Rakyat (DPR)"
+      },
+      {
+        "id": "D",
+        "text": "Majelis Permusyawaratan Rakyat (MPR)"
+      }
+    ],
+    "correctAnswer": "D"
+  },
+  {
+    "id": 13,
+    "type": "mc",
+    "prompt": "Pidato kenegaraan Presiden di hadapan DPR sebelum 17 Agustus tentang rancangan anggaran negara merupakan contoh ....",
+    "options": [
+      {
+        "id": "A",
+        "text": "konvensi, yaitu konstitusi tidak tertulis"
+      },
+      {
+        "id": "B",
+        "text": "undang-undang dasar tertulis"
+      },
+      {
+        "id": "C",
+        "text": "peraturan pemerintah tertulis"
+      },
+      {
+        "id": "D",
+        "text": "amendemen konstitusi"
+      }
+    ],
+    "correctAnswer": "A"
+  },
+  {
+    "id": 14,
+    "type": "mc",
+    "prompt": "Mengapa hasil kerja Panitia Sembilan penting bagi pembahasan UUD pada sidang kedua BPUPK?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Menjadi keputusan pengangkatan presiden sebelum kemerdekaan."
+      },
+      {
+        "id": "B",
+        "text": "Menjadi rancangan akhir pasal-pasal UUD tanpa perlu pembahasan."
+      },
+      {
+        "id": "C",
+        "text": "Menjadi rancangan Pembukaan UUD yang disepakati sebelum pembahasan selanjutnya."
+      },
+      {
+        "id": "D",
+        "text": "Menjadi dasar pembentukan MPR untuk mengubah UUD."
+      }
+    ],
+    "correctAnswer": "C"
+  },
+  {
+    "id": 15,
+    "type": "mc",
+    "prompt": "Hubungan kerja Panitia Hukum Dasar dengan Panitia Kecil pimpinan Soepomo adalah ....",
+    "options": [
+      {
+        "id": "A",
+        "text": "Panitia Hukum Dasar mengesahkan UUD yang telah disusun Panitia Kecil."
+      },
+      {
+        "id": "B",
+        "text": "Panitia Kecil memilih presiden atas usul Panitia Hukum Dasar."
+      },
+      {
+        "id": "C",
+        "text": "Kedua panitia menyusun rancangan yang tidak saling berhubungan."
+      },
+      {
+        "id": "D",
+        "text": "Panitia Kecil menyusun rancangan batang tubuh UUD untuk dibahas bersama Panitia Hukum Dasar."
+      }
+    ],
+    "correctAnswer": "D"
+  },
+  {
+    "id": 16,
+    "type": "mc",
+    "prompt": "Perubahan rumusan sila pertama dalam rancangan Pembukaan UUD sebelum sidang PPKI juga memengaruhi ....",
+    "options": [
+      {
+        "id": "A",
+        "text": "tanggal pelaksanaan sidang kedua BPUPK"
+      },
+      {
+        "id": "B",
+        "text": "rumusan Pasal 6 ayat (1) dan Pasal 29 ayat (1) pada rancangan saat itu"
+      },
+      {
+        "id": "C",
+        "text": "susunan anggota Panitia Sembilan"
+      },
+      {
+        "id": "D",
+        "text": "jumlah rancangan yang telah dibahas BPUPK"
+      }
+    ],
+    "correctAnswer": "B"
+  },
+  {
+    "id": 17,
+    "type": "mc",
+    "prompt": "UUD NRI Tahun 1945 disebut bersifat luwes karena ....",
+    "options": [
+      {
+        "id": "A",
+        "text": "dapat menyesuaikan diri dengan perkembangan zaman"
+      },
+      {
+        "id": "B",
+        "text": "setiap pejabat boleh mengubahnya sendiri"
+      },
+      {
+        "id": "C",
+        "text": "seluruh pasalnya berlaku sementara"
+      },
+      {
+        "id": "D",
+        "text": "kedudukannya dapat disamakan dengan aturan lain"
+      }
+    ],
+    "correctAnswer": "A"
+  },
+  {
+    "id": 18,
+    "type": "mc",
+    "prompt": "Jika suatu undang-undang dinyatakan bertentangan dengan UUD NRI Tahun 1945, tindakan yang sesuai dengan fungsi UUD sebagai alat kontrol adalah ....",
+    "options": [
+      {
+        "id": "A",
+        "text": "mengubah UUD agar mengikuti undang-undang itu"
+      },
+      {
+        "id": "B",
+        "text": "membiarkan ketentuan tersebut tanpa perbaikan"
+      },
+      {
+        "id": "C",
+        "text": "mengutamakan undang-undang karena lebih rinci"
+      },
+      {
+        "id": "D",
+        "text": "mencabut atau mengubah ketentuan yang bertentangan"
+      }
+    ],
+    "correctAnswer": "D"
+  },
+  {
+    "id": 19,
+    "type": "mc",
+    "prompt": "Mengapa kekuasaan penyelenggara negara perlu diatur dalam UUD?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Agar pejabat dapat bertindak tanpa batas selama menjabat."
+      },
+      {
+        "id": "B",
+        "text": "Agar kekuasaan tidak dijalankan sewenang-wenang dan hak rakyat terlindungi."
+      },
+      {
+        "id": "C",
+        "text": "Agar rakyat tidak dapat menyampaikan kepentingannya."
+      },
+      {
+        "id": "D",
+        "text": "Agar pemerintah tidak perlu mengikuti ketentuan hukum."
+      }
+    ],
+    "correctAnswer": "B"
+  },
+  {
+    "id": 20,
+    "type": "mc",
+    "prompt": "Urutan konstitusi yang pernah berlaku setelah UUD 1945 periode pertama hingga kembali ke UUD 1945 pada 5 Juli 1959 adalah ....",
+    "options": [
+      {
+        "id": "A",
+        "text": "UUD Sementara 1950, Konstitusi RIS, UUD 1945"
+      },
+      {
+        "id": "B",
+        "text": "Konstitusi RIS, UUD 1945, UUD Sementara 1950"
+      },
+      {
+        "id": "C",
+        "text": "Konstitusi RIS, UUD Sementara 1950, UUD 1945"
+      },
+      {
+        "id": "D",
+        "text": "UUD 1945, UUD Sementara 1950, Konstitusi RIS"
+      }
+    ],
+    "correctAnswer": "C"
+  },
+  {
+    "id": 21,
+    "type": "mc",
+    "prompt": "Alasan utama MPR menyepakati untuk tidak mengubah Pembukaan UUD NRI Tahun 1945 adalah ....",
+    "options": [
+      {
+        "id": "A",
+        "text": "Pembukaan memuat cita-cita bersama, tujuan negara, dan kesepakatan awal berdirinya NKRI."
+      },
+      {
+        "id": "B",
+        "text": "Pembukaan hanya mengatur tugas teknis lembaga negara."
+      },
+      {
+        "id": "C",
+        "text": "Pembukaan dapat diganti dengan peraturan pemerintah."
+      },
+      {
+        "id": "D",
+        "text": "Pembukaan tidak memiliki hubungan dengan dasar negara."
+      }
+    ],
+    "correctAnswer": "A"
+  },
+  {
+    "id": 22,
+    "type": "mc",
+    "prompt": "Seseorang rajin mengikuti aturan di rumah, tetapi sering mengganggu ketertiban lingkungan. Sikap yang perlu diperbaikinya adalah ....",
+    "options": [
+      {
+        "id": "A",
+        "text": "menaati aturan hanya ketika berada bersama keluarga"
+      },
+      {
+        "id": "B",
+        "text": "menunggu tetangga menjaga ketertiban terlebih dahulu"
+      },
+      {
+        "id": "C",
+        "text": "menghindari semua kegiatan bersama warga"
+      },
+      {
+        "id": "D",
+        "text": "melaksanakan tanggung jawab menjaga ketertiban juga di masyarakat"
+      }
+    ],
+    "correctAnswer": "D"
+  },
+  {
+    "id": 23,
+    "type": "mc",
+    "prompt": "Saat pelajaran Pendidikan Pancasila, kelompok Nisa mendapat tugas membuat bagan sejarah perumusan UUD NRI Tahun 1945. Mereka menyiapkan tiga kartu besar yang bertuliskan Panitia Sembilan, BPUPK, dan PPKI. Setiap anggota membaca bagian buku yang berbeda. Nisa menemukan catatan tentang Piagam Jakarta pada bulan Juni 1945, sedangkan Raka menemukan pembahasan rancangan UUD dalam sidang bulan Juli. Sementara itu, Deni membaca hasil sidang sehari setelah Proklamasi Kemerdekaan. Ketika menyusun bagan, mereka berbeda pendapat tentang urutan kerja ketiga kelompok tersebut. Guru mengingatkan agar mereka tidak hanya menghafal nama tokoh, tetapi memahami hasil kerja setiap panitia dan hubungannya dengan proses pengesahan UUD.\n\nBagaimana urutan kerja yang paling tepat untuk memperbaiki kartu kelompok tersebut?",
+    "options": [
+      {
+        "id": "A",
+        "text": "PPKI mengesahkan UUD, Panitia Sembilan menyusun Pembukaan, lalu BPUPK membahasnya."
+      },
+      {
+        "id": "B",
+        "text": "Panitia Sembilan menyusun rancangan Pembukaan, BPUPK membahas rancangan UUD, lalu PPKI mengesahkan UUD."
+      },
+      {
+        "id": "C",
+        "text": "BPUPK mengesahkan UUD, PPKI menyusun Piagam Jakarta, lalu Panitia Sembilan membahasnya."
+      },
+      {
+        "id": "D",
+        "text": "Panitia Sembilan mengesahkan UUD, PPKI membahas rancangan, lalu BPUPK menyusun Pembukaan."
+      }
+    ],
+    "correctAnswer": "B"
+  },
+  {
+    "id": 24,
+    "type": "mc",
+    "prompt": "Kelompok Ardi sedang mempersiapkan pameran sejarah di kelas. Mereka membuat tiga lembar poster untuk menggambarkan perubahan rancangan batang tubuh UUD pada masa sidang BPUPK. Pada poster pertama, pasal-pasal belum dibagi menjadi bab. Poster kedua menunjukkan pasal-pasal yang sudah dikelompokkan menjadi beberapa bab serta dilengkapi aturan peralihan dan tambahan. Pada poster terakhir, susunannya kembali berubah setelah para anggota memberikan masukan. Seorang teman menganggap perubahan itu sebagai tanda bahwa panitia tidak mampu menyelesaikan tugas. Ardi mengajak teman-temannya membaca kembali penjelasan tentang pembahasan rancangan yang berlangsung beberapa hari agar mereka dapat menilai proses tersebut dengan lebih tepat.\n\nKesimpulan paling tepat dari hasil pengamatan kelompok tersebut adalah ....",
+    "options": [
+      {
+        "id": "A",
+        "text": "Rancangan pertama sudah menjadi UUD yang disahkan PPKI."
+      },
+      {
+        "id": "B",
+        "text": "Perubahan susunan rancangan menunjukkan para tokoh menghentikan pembahasan."
+      },
+      {
+        "id": "C",
+        "text": "Rancangan UUD disempurnakan melalui pembahasan dan masukan para anggota."
+      },
+      {
+        "id": "D",
+        "text": "Rancangan ketiga dibuat tanpa menggunakan hasil pembahasan sebelumnya."
+      }
+    ],
+    "correctAnswer": "C"
+  },
+  {
+    "id": 25,
+    "type": "mc",
+    "prompt": "Kelas VIII sedang menyusun kesepakatan kegiatan bersama. Beberapa siswa mengusulkan jadwal yang hanya sesuai dengan kebutuhan kelompoknya. Siswa lain menyampaikan bahwa jadwal itu menyulitkan mereka untuk mengikuti kegiatan. Awalnya, kedua kelompok sama-sama ingin mempertahankan usul masing-masing. Guru lalu mengajak mereka mengingat peristiwa menjelang sidang PPKI tanggal 18 Agustus 1945. Saat itu, para tokoh membicarakan perubahan rumusan dalam rancangan Pembukaan UUD agar dapat diterima bersama. Setelah mendengarkan penjelasan tersebut, ketua kelas mengajak semua siswa menyampaikan alasan dan mempertimbangkan kepentingan seluruh anggota kelas sebelum kesepakatan akhir dibuat.\n\nSikap para pendiri negara yang paling tepat untuk diteladani dalam situasi kelas tersebut adalah ....",
+    "options": [
+      {
+        "id": "A",
+        "text": "mendengarkan keberatan kelompok lain dan mencari kesepakatan yang menjaga persatuan"
+      },
+      {
+        "id": "B",
+        "text": "membiarkan kelompok terbanyak menentukan hasil tanpa mendengar alasan lain"
+      },
+      {
+        "id": "C",
+        "text": "mempertahankan setiap usul awal agar tidak terjadi perubahan"
+      },
+      {
+        "id": "D",
+        "text": "menyerahkan seluruh keputusan kepada satu kelompok saja"
+      }
+    ],
+    "correctAnswer": "A"
+  },
+  {
+    "id": 26,
+    "type": "mc",
+    "prompt": "Dalam kegiatan literasi, Sari membaca cerita mengenai kelompok pengemudi yang merasa dirugikan oleh sebuah ketentuan dalam undang-undang. Menurut kelompok tersebut, ketentuan itu tidak sesuai dengan jaminan hak warga negara dalam UUD NRI Tahun 1945. Mereka ingin menempuh cara yang sesuai dengan hukum, bukan memaksa pihak lain mengikuti keinginannya. Sari bersama teman-temannya mendiskusikan mengapa suatu undang-undang masih dapat diperiksa meskipun telah berlaku. Mereka juga membahas bahwa pemeriksaan harus dilakukan oleh lembaga negara yang berwenang. Guru meminta siswa menghubungkan masalah itu dengan kedudukan UUD NRI Tahun 1945 sebagai hukum dasar tertulis tertinggi di Indonesia.\n\nFungsi UUD NRI Tahun 1945 yang paling berkaitan dengan kasus tersebut adalah ....",
+    "options": [
+      {
+        "id": "A",
+        "text": "pedoman untuk memilih pengurus organisasi pengemudi"
+      },
+      {
+        "id": "B",
+        "text": "dasar untuk mengganti setiap undang-undang tanpa pemeriksaan"
+      },
+      {
+        "id": "C",
+        "text": "aturan teknis untuk menentukan tarif setiap perjalanan"
+      },
+      {
+        "id": "D",
+        "text": "alat kontrol untuk menguji kesesuaian undang-undang dengan UUD"
+      }
+    ],
+    "correctAnswer": "D"
+  },
+  {
+    "id": 27,
+    "type": "mc",
+    "prompt": "Di kelas, guru meminta siswa memperhatikan perubahan kehidupan masyarakat sejak dahulu hingga sekarang. Farhan bercerita bahwa saat ini orang dapat bekerja dan memperoleh layanan melalui teknologi yang dahulu belum banyak digunakan. Temannya berpendapat bahwa semua aturan mengenai cara menggunakan teknologi harus ditulis secara lengkap di dalam UUD. Siswa lain menganggap bahwa aturan dasar negara seharusnya tetap berisi pokok-pokok yang penting, sedangkan kebutuhan yang lebih rinci dapat diatur melalui peraturan lainnya. Guru meminta mereka mengingat penjelasan Soepomo tentang rancangan UUD yang singkat dan supel, yaitu luwes. Kelompok itu kemudian membandingkan dua pendapat untuk menentukan hubungan antara hukum dasar dan aturan turunannya.\n\nPendapat manakah yang sesuai dengan sifat UUD NRI Tahun 1945?",
+    "options": [
+      {
+        "id": "A",
+        "text": "Seluruh aturan baru harus dimasukkan ke dalam UUD setiap kali teknologi berubah."
+      },
+      {
+        "id": "B",
+        "text": "Aturan pokok tetap menjadi dasar, sedangkan ketentuan rinci dapat disusun dalam peraturan yang sesuai dengan UUD."
+      },
+      {
+        "id": "C",
+        "text": "Peraturan rinci boleh bertentangan dengan UUD jika lebih sesuai dengan kebutuhan masyarakat."
+      },
+      {
+        "id": "D",
+        "text": "UUD hanya dapat digunakan untuk mengatur kehidupan masyarakat pada tahun 1945."
+      }
+    ],
+    "correctAnswer": "B"
+  },
+  {
+    "id": 28,
+    "type": "mc",
+    "prompt": "Kelompok Bima membuat bahan presentasi tentang perubahan UUD NRI Tahun 1945 setelah tahun 1999. Mereka diminta menjelaskan manfaat perubahan bagi kehidupan bernegara, bukan hanya mencatat tanggal pelaksanaannya. Dalam diskusi, Bima menyampaikan bahwa kekuasaan yang tidak memiliki batas dapat merugikan masyarakat. Temannya menambahkan bahwa hak warga negara juga perlu mendapat perlindungan yang jelas. Anggota lain mengusulkan agar mereka memilih hasil amendemen yang paling berhubungan dengan kedua masalah itu. Sebelum menyelesaikan presentasi, mereka membuka kembali bagian buku mengenai perubahan UUD dan membandingkan usul yang telah disampaikan oleh masing-masing anggota kelompok.\n\nPerubahan UUD yang paling sesuai dengan tujuan pembahasan kelompok tersebut adalah ....",
+    "options": [
+      {
+        "id": "A",
+        "text": "penghapusan semua ketentuan mengenai hak warga negara"
+      },
+      {
+        "id": "B",
+        "text": "pemberian kewenangan tanpa batas kepada penyelenggara negara"
+      },
+      {
+        "id": "C",
+        "text": "pembatasan kekuasaan presiden dan penambahan pasal tentang hak asasi manusia"
+      },
+      {
+        "id": "D",
+        "text": "penempatan peraturan pemerintah di atas UUD"
+      }
+    ],
+    "correctAnswer": "C"
+  },
+  {
+    "id": 29,
+    "type": "mc",
+    "prompt": "Pada hari Minggu, keluarga Rani berencana membersihkan rumah dan halaman. Ayah dan ibu berharap setiap anggota membantu sesuai kemampuannya. Rani ingin membersihkan halaman terlebih dahulu karena siang hari ia harus menyelesaikan tugas sekolah. Adiknya ingin bermain bersama teman, sedangkan kakaknya memiliki kegiatan lain. Mereka sempat saling menyalahkan karena merasa memiliki kepentingan yang lebih penting. Ibu mengajak seluruh anggota keluarga duduk bersama dan membicarakan jadwal yang dapat diterima semua orang. Ia mengingatkan bahwa menjaga rumah merupakan tanggung jawab bersama dan setiap anggota perlu menghargai kebutuhan anggota lainnya. Rani ingin mengambil keputusan yang sesuai dengan pelaksanaan UUD dalam kehidupan keluarga.\n\nTindakan yang paling mencerminkan pelaksanaan UUD NRI Tahun 1945 di lingkungan keluarga adalah ....",
+    "options": [
+      {
+        "id": "A",
+        "text": "bermusyawarah menentukan pembagian tugas yang dapat dijalankan bersama"
+      },
+      {
+        "id": "B",
+        "text": "menetapkan tugas hanya berdasarkan keinginan anggota tertua"
+      },
+      {
+        "id": "C",
+        "text": "membebaskan semua anggota dari kewajiban menjaga rumah"
+      },
+      {
+        "id": "D",
+        "text": "menunda pembagian tugas sampai ada anggota yang mengalah"
+      }
+    ],
+    "correctAnswer": "A"
+  },
+  {
+    "id": 30,
+    "type": "mc",
+    "prompt": "Hujan deras menyebabkan beberapa rumah di lingkungan tempat tinggal Ilham mengalami kerusakan ringan. Warga kemudian merencanakan kegiatan membersihkan halaman dan membantu keluarga yang kesulitan. Sebagian warga yang terdampak baru pindah ke lingkungan itu sehingga belum banyak dikenal oleh anak-anak setempat. Seorang teman Ilham mengatakan bahwa mereka cukup membantu tetangga yang sudah akrab saja. Teman lainnya merasa semua warga yang membutuhkan patut diperhatikan. Ilham mengingat materi Pendidikan Pancasila mengenai pelaksanaan UUD NRI Tahun 1945 di lingkungan masyarakat. Ia ingin ikut membantu tanpa mengganggu tugas sekolahnya serta menjaga hubungan baik dengan warga yang memiliki latar belakang berbeda.\n\nTindakan yang sebaiknya dilakukan Ilham adalah ....",
+    "options": [
+      {
+        "id": "A",
+        "text": "membantu hanya warga yang memiliki hubungan dekat dengan keluarganya"
+      },
+      {
+        "id": "B",
+        "text": "menunggu bantuan dari warga lain tanpa ikut berusaha"
+      },
+      {
+        "id": "C",
+        "text": "menolak membantu jika warga memiliki kebiasaan yang berbeda"
+      },
+      {
+        "id": "D",
+        "text": "mengajak teman membantu warga sesuai kemampuan dan menghormati perbedaan mereka"
+      }
+    ],
+    "correctAnswer": "D"
+  },
+  {
+    "id": 31,
+    "type": "short",
+    "prompt": "Jelaskan perbedaan konstitusi tertulis dan tidak tertulis dengan menyebutkan sebutan masing-masing.",
+    "acceptedAnswers": [
+      "Konstitusi tertulis disebut UUD, sedangkan konstitusi tidak tertulis disebut konvensi.",
+      "UUD merupakan hukum dasar tertulis; konvensi merupakan kebiasaan ketatanegaraan yang tidak tertulis.",
+      "Tertulis: Undang-Undang Dasar; tidak tertulis: konvensi."
+    ],
+    "rubric": [
+      "Komponen 4 poin: Tertulis = UUD/Undang-Undang Dasar",
+      "Komponen 3 poin: Tidak tertulis = konvensi"
+    ]
+  },
+  {
+    "id": 32,
+    "type": "short",
+    "prompt": "Jelaskan perbedaan peran BPUPK dan PPKI dalam proses terbentuknya UUD 1945.",
+    "acceptedAnswers": [
+      "BPUPK membahas dan merumuskan rancangan UUD, sedangkan PPKI mengesahkan UUD pada 18 Agustus 1945.",
+      "BPUPK menyusun rancangan konstitusi; PPKI menetapkannya sebagai UUD.",
+      "BPUPK bertugas merancang UUD; PPKI bertugas mengesahkannya."
+    ],
+    "rubric": [
+      "Komponen 4 poin: BPUPK merumuskan/membahas rancangan UUD",
+      "Komponen 3 poin: PPKI mengesahkan/menetapkan UUD"
+    ]
+  },
+  {
+    "id": 33,
+    "type": "short",
+    "prompt": "Mengapa kesediaan para tokoh mengubah rumusan sila pertama sebelum pengesahan UUD menjadi contoh sikap yang baik bagi bangsa Indonesia?",
+    "acceptedAnswers": [
+      "Para tokoh bersedia bermusyawarah dan menempatkan persatuan bangsa di atas kepentingan kelompok.",
+      "Mereka menerima kesepakatan bersama agar bangsa tetap bersatu.",
+      "Mereka menghargai perbedaan pendapat demi kepentingan seluruh bangsa."
+    ],
+    "rubric": [
+      "Komponen 4 poin: Kesediaan menerima perubahan/musyawarah/menghargai perbedaan",
+      "Komponen 3 poin: Menjaga persatuan/kepentingan bangsa di atas kelompok"
+    ]
+  },
+  {
+    "id": 34,
+    "type": "short",
+    "prompt": "Jelaskan arti sifat singkat dan sifat luwes pada UUD NRI Tahun 1945.",
+    "acceptedAnswers": [
+      "Singkat berarti memuat aturan pokok; luwes berarti dapat mengikuti perkembangan zaman.",
+      "UUD berisi garis besar aturan dan mampu menyesuaikan diri dengan perubahan kehidupan masyarakat.",
+      "Singkat: tidak memuat seluruh rincian; supel: dapat menyesuaikan diri dengan keadaan yang berkembang."
+    ],
+    "rubric": [
+      "Komponen 4 poin: Singkat = aturan pokok/garis besar",
+      "Komponen 3 poin: Luwes/supel = mengikuti perkembangan zaman"
+    ]
+  },
+  {
+    "id": 35,
+    "type": "short",
+    "prompt": "Jelaskan mengapa peraturan yang kedudukannya lebih rendah tidak boleh bertentangan dengan UUD NRI Tahun 1945.",
+    "acceptedAnswers": [
+      "UUD adalah hukum dasar tertulis tertinggi sehingga peraturan di bawahnya harus bersumber dan sesuai dengan UUD.",
+      "UUD berada pada urutan tertinggi; aturan yang lebih rendah wajib mengacu kepadanya.",
+      "UUD menjadi sumber hukum tertulis tertinggi sehingga peraturan lain harus selaras dengannya."
+    ],
+    "rubric": [
+      "Komponen 4 poin: UUD berkedudukan tertinggi/hukum dasar tertulis tertinggi",
+      "Komponen 3 poin: Aturan di bawah harus mengacu/sesuai/tidak bertentangan dengan UUD"
+    ]
+  },
+  {
+    "id": 36,
+    "type": "short",
+    "prompt": "Sebutkan dua hasil amendemen UUD NRI Tahun 1945 yang dibahas dalam buku.",
+    "acceptedAnswers": [
+      "Pembatasan kekuasaan presiden dan penambahan pasal tentang HAM (hak asasi manusia).",
+      "Perubahan struktur lembaga tinggi negara dan pemberlakuan otonomi daerah.",
+      "Pembatasan kekuasaan presiden dan pemberlakuan otonomi daerah."
+    ],
+    "rubric": [
+      "Komponen 4 poin: Satu hasil yang benar dari daftar empat hasil amendemen",
+      "Komponen 3 poin: Satu hasil benar lainnya yang berbeda; daftar: pembatasan kekuasaan presiden, perubahan struktur lembaga tinggi negara, pasal HAM, otonomi daerah"
+    ]
+  },
+  {
+    "id": 37,
+    "type": "short",
+    "prompt": "Mengapa Pembukaan UUD NRI Tahun 1945 disepakati untuk tidak diubah? Jelaskan dua alasan.",
+    "acceptedAnswers": [
+      "Pembukaan memuat cita-cita bersama dan tujuan negara, serta menjadi kesepakatan awal berdirinya NKRI.",
+      "Pembukaan mengandung tujuan bangsa dan menjadi dasar kesepakatan pembentukan negara Indonesia.",
+      "Di dalam Pembukaan terdapat dasar negara Pancasila dan cita-cita bersama bangsa Indonesia."
+    ],
+    "rubric": [
+      "Komponen 4 poin: Satu alasan: cita-cita bersama/tujuan negara/kesepakatan awal/dasar negara Pancasila tetap",
+      "Komponen 3 poin: Satu alasan lain yang berbeda dari daftar tersebut"
+    ]
+  },
+  {
+    "id": 38,
+    "type": "short",
+    "prompt": "Jelaskan satu tindakan yang dapat kamu lakukan saat upacara bendera dan kaitannya dengan pelaksanaan UUD NRI Tahun 1945.",
+    "acceptedAnswers": [
+      "Mengikuti upacara dengan tertib karena merupakan bentuk bela negara.",
+      "Menghormati bendera saat upacara sebagai wujud pelaksanaan bela negara.",
+      "Mengikuti upacara dengan disiplin sebagai pelaksanaan Pasal 30 ayat (1) tentang bela negara."
+    ],
+    "rubric": [
+      "Komponen 4 poin: Tindakan konkret saat upacara yang menunjukkan ketertiban/penghormatan",
+      "Komponen 3 poin: Kaitan dengan bela negara/Pasal 30 ayat (1)"
+    ]
+  },
+  {
+    "id": 39,
+    "type": "short",
+    "prompt": "Di dekat rumah Dita terdapat halaman bersama yang sering digunakan anak-anak untuk bermain. Pada sore hari, sebagian anak ingin bermain bola, sedangkan kelompok lain ingin menggunakan halaman untuk berlatih kegiatan sekolah. Karena tempatnya terbatas, kedua kelompok beberapa kali saling menyalahkan dan meninggalkan sampah setelah kegiatan selesai. Warga mulai merasa terganggu oleh pertengkaran itu. Ketua RT meminta anak-anak menyelesaikan masalah dengan cara yang baik sebelum penggunaan halaman dihentikan. Dita memahami bahwa setiap orang memiliki kepentingan yang berbeda. Ia ingin menunjukkan bahwa pelaksanaan UUD NRI Tahun 1945 tidak hanya dilakukan oleh pejabat negara, tetapi juga dapat dimulai dari kebiasaan hidup rukun di tempat tinggal.\n\nTuliskan satu tindakan yang dapat dilakukan Dita untuk menyelesaikan masalah tersebut dan jelaskan manfaatnya bagi kehidupan bersama.",
+    "acceptedAnswers": [
+      "Mengajak teman berdialog dengan sopan agar jadwal penggunaan tempat disepakati dan kerukunan terjaga.",
+      "Bermusyawarah dengan kedua kelompok untuk membagi waktu secara adil sehingga tidak terjadi pertengkaran.",
+      "Mendengarkan kebutuhan masing-masing kelompok dan membuat kesepakatan bersama agar semua merasa dihargai."
+    ],
+    "rubric": [
+      "Komponen 4 poin: Tindakan konkret: musyawarah/berdialog/membuat kesepakatan dengan kedua kelompok",
+      "Komponen 3 poin: Manfaat: kerukunan/ketertiban/mencegah pertengkaran/menghormati kepentingan bersama"
+    ]
+  },
+  {
+    "id": 40,
+    "type": "short",
+    "prompt": "Bayu tinggal di lingkungan yang warganya berasal dari berbagai daerah. Suatu hari, ia mendengar bahwa seorang tetangga sedang sakit dan keluarganya kesulitan memenuhi beberapa kebutuhan sehari-hari. Sebagian teman Bayu ingin menjenguk, tetapi seorang anak ragu karena keluarga tersebut berbeda kebiasaan dengan mereka. Bayu teringat bahwa di sekolah ia telah mempelajari berbagai bentuk pelaksanaan UUD NRI Tahun 1945 dalam lingkungan masyarakat. Ia ingin melakukan sesuatu yang bermanfaat, tetap sopan kepada keluarga tersebut, dan tidak mengabaikan waktu belajarnya. Sebelum bertindak, Bayu berdiskusi dengan orang tuanya tentang bantuan sederhana yang benar-benar dibutuhkan oleh tetangga itu.\n\nSebutkan satu tindakan yang dapat dilakukan Bayu dan jelaskan kaitannya dengan pelaksanaan UUD NRI Tahun 1945 di masyarakat.",
+    "acceptedAnswers": [
+      "Menjenguk tetangga yang sakit sebagai bentuk kepedulian dan hidup rukun dalam masyarakat.",
+      "Membantu mengantarkan kebutuhan keluarga tetangga agar mereka terbantu dan hubungan warga tetap baik.",
+      "Mengajak teman membantu keluarga yang sedang kesulitan sebagai bentuk saling menolong di lingkungan masyarakat."
+    ],
+    "rubric": [
+      "Komponen 4 poin: Tindakan nyata yang sesuai: menjenguk/membantu kebutuhan/mengajak bantuan",
+      "Komponen 3 poin: Kaitan: kepedulian/saling menolong/hidup rukun/membantu warga yang kesulitan"
+    ]
+  }
+];
+const {useState,useEffect,useRef} = React;
+const QUESTIONS = new Map(rawQuestionsData.map(q=>[q.id,q]));
+const N = rawQuestionsData.length;
+const LABELS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const paths = {book:'M4 19V5a2 2 0 0 1 2-2h14v16H6a2 2 0 0 0 0 4h14M4 19a2 2 0 0 1 2-2h14M8 7h8M8 11h6',clock:'M12 8v4l3 2M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20',check:'m5 12 4 4L19 6',shield:'M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11ZM9 12l2 2 4-4',left:'m15 18-6-6 6-6',right:'m9 18 6-6-6-6',alert:'M12 9v4m0 4h.01M10.3 3.9 2.1 18a2 2 0 0 0 1.7 3h16.4a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z',send:'m22 2-7 20-4-9-9-4 20-7ZM22 2 11 13',user:'M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8'};
+function Icon({name,size=20}){return <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={paths[name]||paths.book}/></svg>}
+function shuffle(items){const a=items.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function normalize(v){return String(v??'').normalize('NFC').trim().replace(/\s+/g,' ').toLocaleLowerCase('id-ID');}
+function localDate(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;}
+function validDate(s){if(!/^\d{4}-\d{2}-\d{2}$/.test(s))return false;const d=new Date(s+'T00:00:00Z');return !isNaN(d)&&d.toISOString().slice(0,10)===s;}
+function token(){const a=new Uint8Array(16);crypto.getRandomValues(a);return Array.from(a,v=>v.toString(16).padStart(2,'0')).join('');}
+function secondsLeft(s,now=Date.now()){return Math.max(0,Math.min(EXAM.duration,Math.ceil((s.deadline-now)/1000)));}
+function timeText(sec){return [Math.floor(sec/3600),Math.floor(sec/60)%60,sec%60].map(n=>String(n).padStart(2,'0')).join(':');}
+function answered(q,v){return q.type==='multi'?Array.isArray(v)&&v.length>0:q.type==='short'?typeof v==='string'&&v.trim().length>0:typeof v==='string'&&v.length>0;}
+function labelFor(s,id,opt){const idx=(s.optionOrder[id]||[]).indexOf(opt);return idx<0?'—':LABELS[idx];}
+function labelList(s,id,opts){return opts.map(o=>labelFor(s,id,o)).sort().join(', ');}
+function grade(s){let benar=0,salah=0,kosong=0;const details=rawQuestionsData.map(q=>{const a=s.answers[q.id];let status='KOSONG',chosen='—',key='—';if(q.type==='mc'){key=labelFor(s,q.id,q.correctAnswer);if(answered(q,a)){chosen=labelFor(s,q.id,a);status=a===q.correctAnswer?'BENAR':'SALAH';}}else if(q.type==='multi'){key=labelList(s,q.id,q.correctAnswers);if(answered(q,a)){const set=new Set(a);chosen=labelList(s,q.id,Array.from(set));status=set.size===q.correctAnswers.length&&q.correctAnswers.every(x=>set.has(x))?'BENAR':'SALAH';}}else if(q.type==='short'){key=q.acceptedAnswers.join(' / ');if(answered(q,a)){chosen=a.trim();status=q.acceptedAnswers.some(x=>normalize(x)===normalize(a))?'BENAR':'SALAH';}}if(status==='BENAR')benar++;else if(status==='SALAH')salah++;else kosong++;return {id:q.id,status,chosen,key,review:q.type==='short'&&status==='SALAH'};});const rincianJawaban=details.map(d=>`Soal ${d.id}: ${d.status}${d.status==='SALAH'?` (Pilih: ${d.chosen.replace(/ \| /g,' ｜ ')}, Kunci: ${d.key})`:''}`).join(' | ');return {skor:Number((benar/N*100).toFixed(2)),benar,salah,kosong,details,rincianJawaban};}
+function makeSession(identity,now=Date.now()){const optionOrder={};rawQuestionsData.forEach(q=>{if(q.options)optionOrder[q.id]=shuffle(q.options.map(o=>o.id));});return {version:SESSION_VERSION,examId:EXAM.id,...identity,token:token(),order:shuffle(rawQuestionsData.map(q=>q.id)),optionOrder,answers:{},active:0,deadline:now+EXAM.duration*1000,remaining:EXAM.duration,violations:0,warning:false,status:'active',reason:''};}
+function sameIds(a,b){return Array.isArray(a)&&a.length===b.length&&new Set(a).size===b.length&&b.every(x=>a.includes(x));}
+function validateSession(s){if(!s||s.version!==SESSION_VERSION||s.examId!==EXAM.id||!['active','pending'].includes(s.status)||!/^([a-f0-9]{32})$/.test(s.token)||!sameIds(s.order,rawQuestionsData.map(q=>q.id))||!s.optionOrder||!s.answers||!Number.isInteger(s.active)||s.active<0||s.active>=N||!Number.isFinite(s.deadline)||!Number.isInteger(s.remaining)||s.remaining<0||s.remaining>EXAM.duration||!Number.isInteger(s.violations)||s.violations<0||s.violations>2||typeof s.warning!=='boolean'||typeof s.nama!=='string'||!s.nama.trim()||typeof s.kelas!=='string'||!s.kelas.trim()||!validDate(s.tanggal))return false;return rawQuestionsData.every(q=>{const v=s.answers[q.id];if(q.options&&!sameIds(s.optionOrder[q.id],q.options.map(o=>o.id)))return false;if(v===undefined)return true;if(q.type==='short')return typeof v==='string'&&v.length<=1000;if(q.type==='multi')return Array.isArray(v)&&new Set(v).size===v.length&&v.every(x=>s.optionOrder[q.id].includes(x));return s.optionOrder[q.id].includes(v);});}
+function loadSession(){try{const raw=localStorage.getItem(STORAGE_KEY);if(!raw)return {session:null,error:''};const s=JSON.parse(raw);if(!validateSession(s))return {session:null,error:'Sesi tersimpan tidak sesuai dengan versi ujian ini atau datanya rusak. Data tidak dihapus otomatis.'};return {session:s,error:''};}catch(e){return {session:null,error:'LocalStorage tidak dapat dibaca. Periksa izin penyimpanan browser sebelum memulai.'};}}
+function validURL(value){try{const u=new URL(value.trim());return u.protocol==='https:'&&u.hostname==='script.google.com'&&/^\/macros\/s\/[A-Za-z0-9_-]+\/exec\/?$/.test(u.pathname)&&!u.search&&!u.hash;}catch(e){return false;}}
+function configuredURL(){return validURL(GOOGLE_SHEETS_WEB_APP_URL)?GOOGLE_SHEETS_WEB_APP_URL.trim():'';}
+function payloadFor(s){const g=grade(s);return {token:s.token,nama:s.nama,kelas:s.kelas,tanggal:s.tanggal,skor:g.skor,pelanggaran:s.violations,keterangan:s.reason,rincianJawaban:g.rincianJawaban,mapel:EXAM.mapel,jenisUjian:EXAM.jenis,kelasUjian:EXAM.kelas,examId:EXAM.id,jumlahSoal:N,benar:g.benar,salah:g.salah,kosong:g.kosong,jawabanIsian:rawQuestionsData.filter(q=>q.type==='short').map(q=>({id:q.id,jawaban:s.answers[q.id]||'',status:g.details.find(d=>d.id===q.id).status})),urutanSoal:s.order,urutanOpsi:s.optionOrder};}
+function jsonp(url,tx,ms=6500){return new Promise((resolve,reject)=>{const name='cbtCallback_'+token();const script=document.createElement('script');let done=false;let timer;const finish=(err,data)=>{if(done)return;done=true;clearTimeout(timer);script.remove();delete window[name];err?reject(err):resolve(data);};window[name]=data=>finish(null,data);script.onerror=()=>finish(new Error('Konfirmasi server tidak dapat dibuka.'));timer=setTimeout(()=>finish(new Error('Konfirmasi server melewati batas waktu.')),ms);const u=new URL(url);u.searchParams.set('action','status');u.searchParams.set('token',tx);u.searchParams.set('callback',name);u.searchParams.set('_',Date.now());script.src=u.toString();document.head.appendChild(script);});}
+const delay=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+async function postPayload(url,payload){const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),15000);try{await fetch(url,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify(payload),signal:controller.signal,credentials:'omit',redirect:'follow'});}finally{clearTimeout(timer);}}
+async function sendAndVerify(url,payload){if(!validURL(url))throw new Error('URL Web App belum dikonfigurasi atau tidak valid.');let last='Transaksi belum terkonfirmasi.';const confirmed=d=>d&&d.status==='success'&&d.recorded===true&&d.token===payload.token&&d.examId===EXAM.id;try{const d=await jsonp(url,payload.token,3500);if(confirmed(d))return d;}catch(e){last=e.message;}try{await postPayload(url,payload);}catch(e){last='POST belum dapat dipastikan: '+e.message;}for(let i=0;i<5;i++){if(i)await delay(1500);try{const d=await jsonp(url,payload.token);if(confirmed(d))return d;if(d?.message)last=d.message;}catch(e){last=e.message;}}throw new Error(last);}
+function Modal({title,children,actions,danger=false}){const box=useRef(null);useEffect(()=>{box.current?.focus();},[]);return <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-slate-950/75 p-4 backdrop-blur-sm" role="presentation"><section ref={box} tabIndex={-1} role="dialog" aria-modal="true" aria-label={title} className="modal-panel card fade w-full max-w-lg p-6 sm:p-8 outline-none" onKeyDown={e=>{if(e.key==='Tab'){const nodes=Array.from(e.currentTarget.querySelectorAll('button:not([disabled]),input:not([disabled]),textarea:not([disabled]),[href]'));if(nodes.length){const a=nodes[0],b=nodes[nodes.length-1];if(e.shiftKey&&(document.activeElement===a||document.activeElement===e.currentTarget)){e.preventDefault();b.focus();}else if(!e.shiftKey&&(document.activeElement===b||document.activeElement===e.currentTarget)){e.preventDefault();a.focus();}}}}}><div className={'mb-4 flex h-12 w-12 items-center justify-center rounded-2xl '+(danger?'bg-red-100 text-red-700':'bg-sky-100 text-sky-700')}><Icon name={danger?'alert':'shield'} size={26}/></div><h2 className="mb-3 text-xl font-bold text-slate-900">{title}</h2><div className="mb-6 leading-relaxed text-slate-600">{children}</div><div className="flex flex-wrap justify-end gap-2">{actions}</div></section></div>}
+function Header({s,remaining}){return <header className="mb-6 flex flex-wrap items-center justify-between gap-4 text-white"><div className="flex items-center gap-3"><div className="rounded-2xl border border-white/25 bg-white/10 p-3"><Icon name="book" size={28}/></div><div><div className="text-xs font-semibold uppercase tracking-[.2em] text-cyan-200">Computer-Based Test</div><h1 className="text-xl font-extrabold sm:text-3xl">{EXAM.mapel}</h1><p className="text-sm text-sky-100">{EXAM.jenis} · Kelas {EXAM.kelas}</p></div></div>{s&&<div className="flex items-center gap-3"><div className="hidden max-w-52 text-right sm:block"><div className="truncate font-semibold">{s.nama}</div><div className="text-xs text-sky-100">Kelas {s.kelas}</div></div>{remaining!==undefined&&<div className={'flex items-center gap-2 rounded-2xl border px-4 py-3 tabular '+(remaining<=300?'border-red-300 bg-red-700':'border-white/25 bg-white/10')}><Icon name="clock"/><span className="text-lg font-bold">{timeText(remaining)}</span></div>}</div>}</header>}
+function Login({onStart,url,storageError,onReset}){const [form,setForm]=useState({nama:'',kelas:'',tanggal:localDate()});const [error,setError]=useState('');const change=(k,v)=>setForm(x=>({...x,[k]:v}));return <div className="grid items-start gap-5 lg:grid-cols-[1fr_1.1fr]"><section className="rounded-3xl border border-white/20 bg-white/10 p-7 text-white sm:p-10"><span className="inline-flex rounded-full bg-cyan-300/20 px-3 py-1 text-xs font-bold uppercase tracking-wider text-cyan-100">Asesmen harian</span><h2 className="mt-5 text-3xl font-bold leading-tight sm:text-4xl">{EXAM.topik}</h2><p className="mt-4 leading-relaxed text-sky-100">Kerjakan setiap soal dengan teliti dan jujur. Jawaban tersimpan otomatis pada perangkat ini selama ujian.</p><div className="mt-7 grid grid-cols-2 gap-3"><div className="rounded-2xl bg-white/10 p-4"><div className="text-2xl font-bold">{N}</div><div className="text-sm text-sky-100">Butir soal</div></div><div className="rounded-2xl bg-white/10 p-4"><div className="text-2xl font-bold">90</div><div className="text-sm text-sky-100">Menit</div></div></div><div className="mt-6 flex gap-3 text-sm text-sky-100"><Icon name="shield" size={24}/><span>Jangan berpindah tab atau keluar dari layar penuh. Pelanggaran kedua mengakhiri ujian otomatis.</span></div></section><section className="card p-6 sm:p-8"><div className="mb-6"><p className="text-xs font-bold uppercase tracking-wider text-sky-700">Identitas peserta</p><h2 className="mt-1 text-2xl font-bold text-slate-900">Masuk ke ujian</h2></div>{storageError&&<div className="mb-4 rounded-xl bg-red-50 p-3 text-sm text-red-800">{storageError}<button className="mt-2 block font-bold underline" type="button" onClick={onReset}>Hapus sesi bermasalah</button></div>}{!url&&<p role="alert" className="mb-4 rounded-xl bg-amber-50 p-3 text-sm text-amber-900">Ujian belum siap digunakan. Silakan hubungi guru.</p>}<form className="space-y-4" onSubmit={e=>{e.preventDefault();const v={nama:form.nama.trim(),kelas:form.kelas.trim(),tanggal:form.tanggal};if(!v.nama||!v.kelas||!validDate(v.tanggal)){setError('Lengkapi nama, kelas, dan tanggal yang valid.');return;}try{onStart(v);setError('');}catch(e){setError(e.message);}}}><label className="block text-sm font-semibold text-slate-700">Nama lengkap<input className="field mt-2" autoComplete="name" required maxLength={120} value={form.nama} onChange={e=>change('nama',e.target.value)} placeholder="Nama sesuai daftar hadir"/></label><label className="block text-sm font-semibold text-slate-700">Kelas<input className="field mt-2" required maxLength={40} value={form.kelas} onChange={e=>change('kelas',e.target.value)} placeholder="Contoh: VIII A"/></label><label className="block text-sm font-semibold text-slate-700">Tanggal ujian<input className="field mt-2" type="date" required value={form.tanggal} onChange={e=>change('tanggal',e.target.value)}/></label>{error&&<p role="alert" className="rounded-xl bg-red-50 p-3 text-sm text-red-800">{error}</p>}<button className="btn primary w-full" disabled={!url||!!storageError} type="submit">Mulai Ujian <Icon name="right"/></button></form></section></div>}
+function QuestionCard({s,onAnswer,locked}){const q=QUESTIONS.get(s.order[s.active]);const value=s.answers[q.id];return <article className="card p-5 sm:p-8" key={q.id}><div className="mb-5 flex flex-wrap items-center justify-between gap-2"><span className="rounded-full bg-sky-100 px-3 py-1 text-sm font-bold text-sky-800">Soal {s.active+1} / {N}</span><span className="text-xs font-bold uppercase tracking-wide text-slate-500">{q.type==='short'?'Isian singkat':q.type==='multi'?'Pilihan ganda kompleks':'Pilihan ganda'}</span></div><div className="question-text mb-5 text-base font-medium text-slate-800 sm:text-lg">{q.prompt}</div>{q.image&&<img className="mb-4 max-h-96 max-w-full rounded-xl object-contain" src={q.image} alt="Ilustrasi pendukung soal"/>}{q.table&&<div className="mb-5 overflow-x-auto"><table className="w-full border-collapse text-left text-sm"><thead><tr>{q.table.headers.map((x,i)=><th key={i} className="border bg-sky-100 p-3">{x}</th>)}</tr></thead><tbody>{q.table.rows.map((r,i)=><tr key={i}>{r.map((x,j)=><td key={j} className="border p-3">{x}</td>)}</tr>)}</tbody></table></div>}{q.type==='short'?<div><label htmlFor="short-answer" className="mb-2 block text-sm text-slate-600">Jawab dengan singkat dan jelas (1–2 kalimat atau dua frasa).</label><textarea id="short-answer" className="field min-h-32 resize-y leading-relaxed" value={value||''} maxLength={1000} disabled={locked} onChange={e=>onAnswer(q.id,e.target.value)} placeholder="Ketik jawaban di sini…"/><div className="text-right text-xs text-slate-500">{(value||'').length}/1000</div></div>:<fieldset disabled={locked} className="space-y-3"><legend className="mb-3 text-sm text-slate-500">{q.type==='multi'?'Pilih semua jawaban yang tepat.':'Pilih satu jawaban yang paling tepat.'}</legend>{s.optionOrder[q.id].map((id,i)=>{const o=q.options.find(x=>x.id===id);const selected=q.type==='multi'?(value||[]).includes(id):value===id;return <label key={id} className={'flex cursor-pointer items-start gap-3 rounded-2xl border p-4 transition '+(selected?'border-sky-600 bg-sky-50 ring-1 ring-sky-600':'border-slate-200 hover:border-sky-300 hover:bg-slate-50')}><input type={q.type==='multi'?'checkbox':'radio'} name="answer" checked={selected} className="mt-1 h-4 w-4 shrink-0 accent-sky-700" onChange={()=>onAnswer(q.id,q.type==='multi'?(selected?(value||[]).filter(x=>x!==id):[...(value||[]),id]):id)}/><span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-sky-100 text-sm font-bold text-sky-800">{LABELS[i]}</span><span className="min-w-0 flex-1 leading-relaxed text-slate-800">{o.text}</span></label>})}</fieldset>}<div className={'mt-5 text-sm font-semibold '+(answered(q,value)?'text-emerald-700':'text-slate-500')}>{answered(q,value)?'✓ Jawaban telah diisi':'Belum dijawab'}</div>{answered(q,value)&&q.type!=='short'&&<button disabled={locked} type="button" className="mt-2 text-sm font-semibold text-slate-500 underline" onClick={()=>onAnswer(q.id,q.type==='multi'?[]:'')}>Kosongkan jawaban</button>}</article>}
+function NavigationPanel({s,onNavigate,onFinish,locked}){const count=s.order.filter(id=>answered(QUESTIONS.get(id),s.answers[id])).length;return <aside className="card h-fit p-5 lg:sticky lg:top-4"><div className="flex items-center justify-between"><h2 className="font-bold text-slate-900">Navigasi soal</h2><span className="text-sm font-bold text-sky-700">{count}/{N}</span></div><div className="my-4 h-2 overflow-hidden rounded-full bg-slate-100"><div className="progress-bar h-full rounded-full bg-emerald-500" style={{width:`${count/N*100}%`}}/></div><div className="grid grid-cols-5 gap-2 sm:grid-cols-8 lg:grid-cols-5">{s.order.map((id,i)=>{const done=answered(QUESTIONS.get(id),s.answers[id]);return <button type="button" key={id} disabled={locked} onClick={()=>onNavigate(i)} aria-label={`Soal ${i+1}, ${done?'sudah dijawab':'belum dijawab'}`} aria-current={i===s.active?'step':undefined} className={'h-10 rounded-xl border text-sm font-bold '+(done?'border-emerald-200 bg-emerald-100 text-emerald-800':'border-slate-200 bg-slate-50 text-slate-700')+(i===s.active?' ring-2 ring-sky-600 ring-offset-1':'')}>{i+1}</button>})}</div><div className="my-4 flex flex-wrap gap-3 text-xs text-slate-600"><span>🟢 Terjawab</span><span>⚪ Kosong</span><span>🔵 Aktif</span></div><div className="mb-4 rounded-xl bg-slate-50 p-3 text-sm text-slate-600">Pelanggaran: <b className={s.violations?'text-red-700':'text-slate-800'}>{s.violations}/2</b></div><button type="button" disabled={locked} className="btn primary w-full" onClick={onFinish}><Icon name="send"/> Selesai & Kumpulkan</button></aside>}
+function ResultCard({s,sending,confirmed,error,onRetry,onExit}){const g=grade(s);return <section className="card p-5 sm:p-8"><div className="flex flex-wrap items-start justify-between gap-3"><div><p className="text-xs font-bold uppercase tracking-wider text-sky-700">Hasil ujian</p><h2 className="mt-1 text-2xl font-bold text-slate-900">{EXAM.jenis}</h2><p className="text-slate-600">{s.nama} · Kelas {s.kelas} · {s.tanggal}</p><p className="mt-1 text-sm text-slate-500">{s.reason}</p></div><div className="rounded-2xl bg-sky-50 px-7 py-4 text-center"><div className="text-xs font-bold uppercase tracking-wider text-sky-700">Nilai otomatis</div><div className="tabular text-5xl font-extrabold text-sky-800">{g.skor.toFixed(2)}</div><div className="text-xs text-slate-500">dari 100</div></div></div><div className="my-6 grid grid-cols-2 gap-3 sm:grid-cols-4">{[['Benar',g.benar,'bg-emerald-50 text-emerald-800'],['Salah',g.salah,'bg-red-50 text-red-800'],['Kosong',g.kosong,'bg-slate-100 text-slate-700'],['Pelanggaran',s.violations,'bg-amber-50 text-amber-800']].map(([k,v,c])=><div key={k} className={'rounded-2xl p-4 '+c}><div className="text-xs font-semibold uppercase">{k}</div><div className="text-2xl font-bold">{v}</div></div>)}</div><div role="status" className={'mb-5 rounded-2xl border p-4 '+(confirmed?'border-emerald-200 bg-emerald-50 text-emerald-800':'border-amber-200 bg-amber-50 text-amber-900')}><div className="flex items-center gap-2 font-bold"><Icon name={confirmed?'check':'clock'}/>{confirmed?'Data telah tercatat di Google Sheets':sending?'Mengirim dan menunggu konfirmasi server…':'Data belum terkonfirmasi'}</div>{!confirmed&&<p className="mt-1 text-sm">Lembar ujian terkunci. Progres dan token tetap tersimpan; jangan hapus penyimpanan browser.</p>}{error&&<p className="mt-2 text-sm wordwrap">{error}</p>}{!confirmed&&!sending&&<><div className="mt-3 flex flex-wrap gap-2"><button className="btn primary" onClick={onRetry}>Kirim ulang nilai</button></div></>}</div><p className="mb-5 text-sm text-slate-600">Penilaian isian menggunakan pencocokan variasi jawaban dokumen. Guru dapat memeriksa jawaban lain yang semakna pada laporan.</p><details className="rounded-2xl border border-slate-200 p-4"><summary className="cursor-pointer font-bold text-slate-800">Rincian jawaban (urutan tampilan ujian)</summary><div className="mt-4 space-y-3">{s.order.map((id,i)=>{const d=g.details.find(x=>x.id===id);return <div key={id} className="rounded-xl bg-slate-50 p-3 text-sm wordwrap"><div className="flex flex-wrap justify-between gap-2"><b>Soal {i+1}</b><b className={d.status==='BENAR'?'text-emerald-700':d.status==='SALAH'?'text-red-700':'text-slate-500'}>{d.status}</b></div><p className="mt-1 text-slate-600">Jawaban: {d.chosen}</p>{confirmed&&d.status==='SALAH'&&<p className="mt-1 text-slate-600">Kunci: {d.key}</p>}{d.review&&<p className="mt-1 text-amber-800">Perlu ditinjau guru jika jawaban bermakna sama.</p>}</div>})}</div></details>{confirmed&&<button className="btn secondary mt-5" onClick={onExit}>Kembali ke halaman login</button>}</section>}
+function App(){
+ const [initial]=useState(loadSession);const [s,setS]=useState(initial.session);const current=useRef(initial.session);const [page,setPage]=useState(initial.session?'resume':'login');const pageRef=useRef(initial.session?'resume':'login');const [modal,setModal]=useState(null);const modalRef=useRef(null);const url=configuredURL();const [storageError,setStorageError]=useState(initial.error);const [saveWarning,setSaveWarning]=useState('');const [fsWarning,setFsWarning]=useState('');const [sending,setSending]=useState(false);const [confirmed,setConfirmed]=useState(false);const [sendError,setSendError]=useState('');const busy=useRef(false);const alive=useRef(true);const fsArmed=useRef(false);const episode=useRef(false);const lastViolation=useRef(0);const fullscreenGeneration=useRef(0);const actionRef=useRef(null);
+ function navigatePage(p){pageRef.current=p;setPage(p);}
+ function showModal(m){modalRef.current=m;setModal(m);}
+ function persist(next,strict=false){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(next));setSaveWarning('');return true;}catch(e){setSaveWarning('Penyimpanan lokal gagal. Jangan tutup halaman ini; hubungi guru.');if(strict)throw new Error('LocalStorage tidak dapat menyimpan sesi. Periksa izin penyimpanan dan ruang browser.');return false;}}
+ function commit(next,strict=false){persist(next,strict);current.current=next;setS(next);}
+ function enterFullscreen(){const gen=++fullscreenGeneration.current;fsArmed.current=!!document.fullscreenElement;if(document.fullscreenElement){setFsWarning('');return;}const el=document.documentElement;if(!el.requestFullscreen){setFsWarning('Browser tidak mendukung layar penuh. Pengawasan perpindahan tab tetap aktif.');return;}try{Promise.resolve(el.requestFullscreen()).then(()=>{if(!alive.current||gen!==fullscreenGeneration.current||pageRef.current!=='exam')return;fsArmed.current=!!document.fullscreenElement;setFsWarning(fsArmed.current?'':'Layar penuh belum aktif. Pengawasan tab tetap aktif.');}).catch(()=>{if(alive.current&&gen===fullscreenGeneration.current&&pageRef.current==='exam'){fsArmed.current=false;setFsWarning('Layar penuh ditolak browser. Pengawasan tab tetap aktif.');}});}catch(e){fsArmed.current=false;setFsWarning('Layar penuh tidak dapat diaktifkan. Pengawasan tab tetap aktif.');}}
+ function exitFullscreen(){++fullscreenGeneration.current;fsArmed.current=false;if(document.fullscreenElement&&document.exitFullscreen){try{Promise.resolve(document.exitFullscreen()).catch(()=>{});}catch(e){}}}
+ async function submitPending(target=current.current){if(!target||target.status!=='pending'||busy.current)return;busy.current=true;setSending(true);setConfirmed(false);setSendError('');try{const payload=payloadFor(target);await sendAndVerify(url,payload);if(!alive.current)return;const saved=current.current;if(!saved||saved.token!==target.token)return;const done={...saved,status:'confirmed'};current.current=done;setS(done);setConfirmed(true);try{localStorage.removeItem(STORAGE_KEY);setSaveWarning('');}catch(e){setSaveWarning('Data sudah tercatat, tetapi sesi lokal belum dapat dihapus. Token mencegah duplikasi saat dikirim ulang.');}}catch(e){if(alive.current)setSendError(e.message||'Pengiriman belum terkonfirmasi.');}finally{busy.current=false;if(alive.current)setSending(false);}}
+ function finish(reason,source=current.current){if(!source||source.status!=='active')return;const next={...source,remaining:secondsLeft(source),status:'pending',warning:false,reason};commit(next);showModal(null);navigatePage('result');exitFullscreen();submitPending(next);}
+ function start(identity){if(!url)throw new Error('Ujian belum siap digunakan. Silakan hubungi guru.');if(storageError)throw new Error(storageError);const next=makeSession(identity);commit(next,true);episode.current=false;lastViolation.current=0;setConfirmed(false);setSendError('');showModal(null);navigatePage('exam');enterFullscreen();}
+ function resume(){const old=current.current;if(!old)return;if(old.status==='pending'){navigatePage('result');return;}const next={...old,remaining:secondsLeft(old)};if(next.remaining<=0){finish('Waktu habis',next);return;}if(next.violations>=2){finish('Dihentikan: dua pelanggaran',next);return;}commit(next);episode.current=next.warning;lastViolation.current=0;navigatePage('exam');showModal(next.warning?'warning':null);enterFullscreen();}
+ function reset(){try{localStorage.removeItem(STORAGE_KEY);setStorageError('');setSaveWarning('');current.current=null;setS(null);setConfirmed(false);setSendError('');showModal(null);navigatePage('login');}catch(e){setStorageError('Sesi tidak dapat dihapus karena penyimpanan browser tidak tersedia.');showModal(null);}}
+ function updateAnswer(id,v){const old=current.current;if(pageRef.current!=='exam'||old?.status!=='active'||old.warning||modalRef.current)return;if(secondsLeft(old)<=0){finish('Waktu habis',old);return;}const answers={...old.answers};if(v===''||(Array.isArray(v)&&!v.length))delete answers[id];else answers[id]=v;commit({...old,answers});}
+ function move(i){const old=current.current;if(pageRef.current!=='exam'||old?.status!=='active'||old.warning||modalRef.current||i<0||i>=N)return;if(secondsLeft(old)<=0){finish('Waktu habis',old);return;}commit({...old,active:i});}
+ function violation(){const old=current.current;if(pageRef.current!=='exam'||old?.status!=='active'||old.warning||episode.current)return;if(secondsLeft(old)<=0){finish('Waktu habis',old);return;}episode.current=true;lastViolation.current=Date.now();const next={...old,violations:Math.min(2,old.violations+1),warning:true};if(next.violations>=2){finish('Dihentikan: dua pelanggaran',next);return;}commit(next);showModal('warning');}
+ function acknowledge(){const old=current.current;if(old?.status!=='active'||!old.warning)return;if(secondsLeft(old)<=0){finish('Waktu habis',old);return;}commit({...old,warning:false});showModal(null);enterFullscreen();if(!document.hidden){episode.current=false;lastViolation.current=Date.now();}}
+ function tick(){const old=current.current;if(pageRef.current!=='exam'||old?.status!=='active')return;const remaining=secondsLeft(old);if(!remaining){finish('Waktu habis',old);return;}if(remaining!==old.remaining)commit({...old,remaining});}
+ actionRef.current={tick,violation,acknowledge};
+ useEffect(()=>{alive.current=true;const examActive=()=>pageRef.current==='exam'&&current.current?.status==='active';const hidden=()=>{if(!examActive())return;if(document.hidden){if(Date.now()-lastViolation.current>=700||!episode.current)actionRef.current.violation();}else if(!current.current.warning){episode.current=false;actionRef.current.tick();}};const full=()=>{if(!examActive())return;if(document.fullscreenElement){fsArmed.current=true;setFsWarning('');if(!current.current.warning&&!document.hidden)episode.current=false;}else if(fsArmed.current){fsArmed.current=false;if(Date.now()-lastViolation.current<700){if(current.current.warning||episode.current)return;}actionRef.current.violation();}};const block=e=>{if(examActive())e.preventDefault();};const key=e=>{if(!examActive())return;const k=e.key.toLowerCase();const ctrl=e.ctrlKey||e.metaKey;if(k==='f12'||(ctrl&&['c','x','v','a','p','s','u','r','t','n','w','l','o','f'].includes(k))||(ctrl&&e.shiftKey&&['i','j','c','k','r'].includes(k)))e.preventDefault();};const save=()=>{const old=current.current;if(old&&['active','pending'].includes(old.status)){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(old.status==='active'?{...old,remaining:secondsLeft(old)}:old));}catch(e){}}};const interval=setInterval(()=>actionRef.current.tick(),250);document.addEventListener('visibilitychange',hidden);document.addEventListener('fullscreenchange',full);['contextmenu','copy','cut','paste','dragstart'].forEach(x=>document.addEventListener(x,block,true));document.addEventListener('keydown',key,true);window.addEventListener('beforeunload',save);window.addEventListener('pagehide',save);return()=>{alive.current=false;clearInterval(interval);document.removeEventListener('visibilitychange',hidden);document.removeEventListener('fullscreenchange',full);['contextmenu','copy','cut','paste','dragstart'].forEach(x=>document.removeEventListener(x,block,true));document.removeEventListener('keydown',key,true);window.removeEventListener('beforeunload',save);window.removeEventListener('pagehide',save);};},[]);
+ const remaining=s?.remaining??EXAM.duration;const count=s?s.order.filter(id=>answered(QUESTIONS.get(id),s.answers[id])).length:0;const locked=!!modal||s?.status!=='active'||s?.warning;
+ return <main className={'mx-auto min-h-screen max-w-7xl px-4 py-5 sm:px-7 sm:py-8 '+(page==='exam'?'exam-lock':'')}><Header s={page==='exam'||page==='result'?s:null} remaining={page==='exam'?remaining:undefined}/>{saveWarning&&<div role="alert" className="mb-4 rounded-xl bg-amber-100 p-3 text-sm font-semibold text-amber-950">{saveWarning}</div>}{page==='login'&&<Login onStart={start} url={url} storageError={storageError} onReset={()=>showModal('reset')}/>} {page==='resume'&&s&&<section className="card mx-auto max-w-xl p-7 sm:p-9"><div className="mb-4 inline-flex rounded-2xl bg-sky-100 p-3 text-sky-700"><Icon name="clock" size={28}/></div><h2 className="text-2xl font-bold text-slate-900">Sesi Ujian Tersimpan Ditemukan!</h2><p className="mt-2 text-slate-600">{s.nama} · Kelas {s.kelas} · {s.tanggal}</p><div className="my-5 rounded-xl bg-slate-50 p-4 text-sm text-slate-700"><p>Terjawab: {count}/{N}</p><p>Sisa waktu: {timeText(s.status==='active'?secondsLeft(s):s.remaining)}</p><p>Pelanggaran: {s.violations}/2</p><p>Status: {s.status==='pending'?'Menunggu konfirmasi pengiriman':'Ujian belum selesai'}</p></div>{s.status==='pending'?<button className="btn primary w-full" onClick={resume}>Buka hasil & kirim ulang nilai</button>:<div className="flex flex-wrap gap-2"><button className="btn primary flex-1" onClick={resume}>Lanjutkan Ujian</button><button className="btn secondary flex-1" onClick={()=>showModal('reset')}>Mulai Ulang (Hapus Progres)</button></div>}</section>}{page==='exam'&&s&&<><div className="mb-4 flex flex-wrap items-center justify-between gap-2 rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-sm text-white"><span className="flex items-center gap-2"><Icon name="user" size={17}/> {s.nama} · {s.kelas}</span><span>Progres: {count}/{N} terjawab</span><span>{saveWarning?'Autosave bermasalah':'Autosave aktif'}</span></div>{fsWarning&&<div className="mb-4 flex flex-wrap items-center justify-between gap-2 rounded-xl bg-amber-100 p-3 text-sm text-amber-950"><span>{fsWarning}</span><button disabled={locked} className="font-bold underline" onClick={enterFullscreen}>Aktifkan layar penuh</button></div>}<div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_320px]"><div><QuestionCard s={s} locked={locked} onAnswer={updateAnswer}/><div className="mt-4 flex flex-wrap justify-between gap-3"><button type="button" disabled={locked||s.active===0} className="btn secondary" onClick={()=>move(s.active-1)}><Icon name="left"/> Sebelumnya</button>{s.active===N-1?<button type="button" disabled={locked} className="btn primary" onClick={()=>showModal('finish')}>Selesai & Kumpulkan <Icon name="send"/></button>:<button type="button" disabled={locked} className="btn primary" onClick={()=>move(s.active+1)}>Selanjutnya <Icon name="right"/></button>}</div></div><NavigationPanel s={s} locked={locked} onNavigate={move} onFinish={()=>showModal('finish')}/></div></>}{page==='result'&&s&&<ResultCard s={s} sending={sending} confirmed={confirmed} error={sendError} onRetry={()=>submitPending()} onExit={()=>{current.current=null;setS(null);navigatePage('login');}}/>}<footer className="mt-8 text-center text-xs text-sky-100/80">CBT · {EXAM.mapel} · Kelas {EXAM.kelas} · {EXAM.jenis}</footer>{modal==='warning'&&<Modal title="PERINGATAN! Pelanggaran pertama" danger actions={<button type="button" className="btn danger w-full" onClick={acknowledge}>Saya mengerti, lanjutkan ujian</button>}>Anda terdeteksi berpindah tab atau keluar dari layar penuh. Pelanggaran berikutnya akan mengakhiri ujian secara otomatis. Kembali ke layar penuh dan tetap berada di halaman ujian.</Modal>}{modal==='finish'&&<Modal title="Kumpulkan jawaban?" actions={<><button className="btn secondary" onClick={()=>showModal(null)}>Periksa lagi</button><button className="btn primary" onClick={()=>finish('Dikumpulkan peserta')}>Ya, kumpulkan</button></>}>Anda telah menjawab {count} dari {N} soal. Masih ada {N-count} soal kosong. Setelah dikumpulkan, jawaban tidak dapat diubah.</Modal>}{modal==='reset'&&<Modal title="Hapus progres ujian?" danger actions={<><button className="btn secondary" onClick={()=>showModal(null)}>Batal</button><button className="btn danger" onClick={reset}>Hapus progres</button></>}>Sesi aktif yang tersimpan akan dihapus dari perangkat ini. Jawaban, waktu dan urutan soal tidak dapat dipulihkan. Sesi menunggu pengiriman tidak dapat dihapus melalui pilihan ini.</Modal>}</main>;
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>
